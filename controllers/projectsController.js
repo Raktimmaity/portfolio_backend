@@ -9,6 +9,15 @@ const getProjects = async (req, res) => {
   }
 };
 
+const getPublicProjects = async (req, res) => {
+  try {
+    const projects = await Project.find().sort({ createdAt: -1 });
+    res.json(projects);
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 const createProject = async (req, res) => {
   try {
     const { title, imageUrl, projectLink, githubLink, projectType, skills, cost, description } =
@@ -65,4 +74,4 @@ const deleteProject = async (req, res) => {
   }
 };
 
-module.exports = { getProjects, createProject, updateProject, deleteProject };
+module.exports = { getProjects, getPublicProjects, createProject, updateProject, deleteProject };
