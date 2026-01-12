@@ -11,6 +11,16 @@ const getAdminProfile = async (req, res) => {
   }
 };
 
+const getPublicProfile = async (req, res) => {
+  try {
+    const admin = await Admin.findOne({ role: "admin" }).select("-password");
+    if (!admin) return res.status(404).json({ message: "Admin not found" });
+    res.json(admin);
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 const updateAdminProfile = async (req, res) => {
   try {
     const admin = await Admin.findById(req.user.id);
@@ -46,4 +56,4 @@ const updateAdminProfile = async (req, res) => {
   }
 };
 
-module.exports = { getAdminProfile, updateAdminProfile };
+module.exports = { getAdminProfile, updateAdminProfile, getPublicProfile };

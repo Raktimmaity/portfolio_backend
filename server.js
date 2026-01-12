@@ -9,6 +9,10 @@ const contactRoutes = require("./routes/contactRoutes");
 const seedTestimonials = require("./seedTestimonials");
 const testimonialsRoutes = require("./routes/testimonialsRoutes");
 const projectsRoutes = require("./routes/projectsRoutes");
+const { getAbout } = require("./controllers/aboutController");
+const { getPublicProfile } = require("./controllers/adminController");
+const { getResumeEntries } = require("./controllers/resumeController");
+const { getSkills } = require("./controllers/skillsController");
 
 const app = express();
 app.use(express.json());
@@ -36,6 +40,10 @@ app.use("/api/visitor", visitorRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/testimonials", testimonialsRoutes);
 app.use("/api/projects", projectsRoutes);
+app.get("/api/about", getAbout);
+app.get("/api/profile", getPublicProfile);
+app.get("/api/resume", getResumeEntries);
+app.get("/api/skills", getSkills);
 
 const PORT = process.env.PORT || 5000;
 const MONGO = process.env.MONGO_URI;
