@@ -13,6 +13,10 @@ const { getAbout } = require("./controllers/aboutController");
 const { getPublicProfile } = require("./controllers/adminController");
 const { getResumeEntries } = require("./controllers/resumeController");
 const { getSkills } = require("./controllers/skillsController");
+const { getCv, downloadCv } = require("./controllers/cvController");
+const { getCoActivities } = require("./controllers/coActivitiesController");
+const { getLanguages } = require("./controllers/languagesController");
+const { getStrengthsInterests } = require("./controllers/strengthsInterestsController");
 
 const app = express();
 app.use(express.json());
@@ -44,6 +48,11 @@ app.get("/api/about", getAbout);
 app.get("/api/profile", getPublicProfile);
 app.get("/api/resume", getResumeEntries);
 app.get("/api/skills", getSkills);
+app.get("/api/cv", getCv);
+app.get("/api/cv/download", downloadCv);
+app.get("/api/co-activities", getCoActivities);
+app.get("/api/languages", getLanguages);
+app.get("/api/strengths-interests", getStrengthsInterests);
 
 const PORT = process.env.PORT || 5000;
 const MONGO = process.env.MONGO_URI;
